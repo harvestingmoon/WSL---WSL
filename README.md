@@ -13,5 +13,5 @@ Provided by vLLM to ensure that the NCCL and GOOL layers can communicate. Also, 
 4. ```example.sh```
 To run an example script locally for Phi-3
 
-5.``` commands.txt ```
+5. ``` commands.txt ```
 Various commands for networking & running for VLLM
