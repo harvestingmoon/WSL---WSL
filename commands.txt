@@ -1,0 +1,24 @@
+1. Networking Configuration 
+
+Set-NetFirewallHyperVVMSetting -Name "{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}" -DefaultInboundAction Allow
+
+2. Init Ray Clusters 
+
+export NCCL_DEBUG=INFO
+export GLOO_DEBUG=2
+export VLLM_LOGGING_LEVEL=DEBUG
+export NCCL_SOCKET_IFNAME=<Your networking interface>
+export GLOO_SOCKET_IFNAME=<Your Networking interface>
+export NCCL_ASYNC_ERROR_HANDLING=1 
+export RAY_memory_monitor_refresh_ms=0
+
+
+ray start --address=<your IP address>
+
+ray start --head  --port=6379
+
+3. Run Phi Models
+vllm serve microsoft/Phi-3-mini-4k-instruct    
+--host 0.0.0.0     --port 8000     
+--tensor-parallel-size 1  --pipeline-parallel-size 2  
+ --gpu-memory-utilization 0.98     --swap-space 4
